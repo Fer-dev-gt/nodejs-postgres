@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const pool = requer('../libs/postgres.pool.js')
+const pool = require('../libs/postgres.pool')
 
 class CategoryService {
 
