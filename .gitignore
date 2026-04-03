@@ -4,5 +4,6 @@ node_modules/
 *.log
 docker-compose.yml
 postgres_data/
+mysql_data/
 build/
 package-lock.json

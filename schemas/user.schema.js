@@ -20,15 +20,4 @@ const getUserSchema = Joi.object({
   id: id.required(),
 });
 
-function queryErrorHandler(err, req, res, next) {
-  if (err.parent) {
-    const { fields, parent } = err;
-    res.status(500).json({
-      field: fields,
-      message: parent.detail
-    })
-  }
-  next(err);
-}
-
 module.exports = { createUserSchema, updateUserSchema, getUserSchema }
