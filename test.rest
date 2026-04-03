@@ -3,3 +3,24 @@ GET http://localhost:3000/api/v1/users
 
 
 # GET http://localhost:3000/api/v1/products
+
+# POST http://localhost:3000/api/v1/users
+# Content-Type: application/json
+
+# {
+#   "email": "alison@andrea.com",
+#   "password": "AlisonAndrea"
+# }
+
+
+# GET http://localhost:3000/api/v1/users/4
+
+# PATCH http://localhost:3000/api/v1/users/4
+# Content-Type: application/json
+
+# {
+#   "email": "andrea2@alison.com"
+# }
+
+
+# DELETE http://localhost:3000/api/v1/users/1
