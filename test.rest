@@ -1,16 +1,17 @@
 
-GET http://localhost:3000/api/v1/users
+# GET http://localhost:3000/api/v1/users
 
 
 # GET http://localhost:3000/api/v1/products
 
-# POST http://localhost:3000/api/v1/users
-# Content-Type: application/json
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
 
-# {
-#   "email": "Fernando@gt.com",
-#   "password": "papapapapapa"
-# }
+{
+  "email": "Fernando33@gt.com",
+  "password": "papapapapapa",
+  "role": "owner"
+}
 
 
 # GET http://localhost:3000/api/v1/users/4
