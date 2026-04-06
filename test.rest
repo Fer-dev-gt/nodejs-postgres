@@ -23,15 +23,31 @@
 #   "email": "andrea2@alison.com"
 # }
 
-
 # DELETE http://localhost:3000/api/v1/users/1
+
+
+GET http://localhost:3000/api/v1/customers
 
 # POST http://localhost:3000/api/v1/customers
 # Content-Type: application/json
 
 # {
-#   "name": "Jose",
-#   "lastName": "Joseeee",
-#   "phone": "dsafadsf",
-#   "userId": 2
+#   "name": "Manuel",
+#   "lastName": "Pablo",
+#   "phone": "244523342",
+#   "userId": 4
+# }
+
+
+# POST http://localhost:3000/api/v1/customers
+# Content-Type: application/json
+
+# {
+#   "name": "Melissa",
+#   "lastName": "Sandoval",
+#   "phone": "244523342",
+#   "user": {
+#     "email": "meli@mail.com",
+#     "password": "anotheruser2"
+#   }
 # }
