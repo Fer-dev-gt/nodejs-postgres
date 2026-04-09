@@ -26,7 +26,7 @@
 # DELETE http://localhost:3000/api/v1/users/1
 
 
-GET http://localhost:3000/api/v1/customers
+# GET http://localhost:3000/api/v1/customers
 
 # POST http://localhost:3000/api/v1/customers
 # Content-Type: application/json
@@ -51,3 +51,27 @@ GET http://localhost:3000/api/v1/customers
 #     "password": "anotheruser2"
 #   }
 # }
+
+
+# POST http://localhost:3000/api/v1/categories
+# Content-Type: application/json
+
+# {
+#   "name": "Category 1",
+#   "image": "http://placeimg.com/640/480"
+# }
+
+# POST http://localhost:3000/api/v1/products
+# Content-Type: application/json
+
+# {
+#   "name": "Una camisa cat2",
+#   "price": 1212,
+#   "description": "Aqui colocas tu description",
+#   "image": "http://placeimg.com/640/480",
+#   "categoryId": 2
+# }
+
+# GET http://localhost:3000/api/v1/products
+# GET http://localhost:3000/api/v1/categories
+GET http://localhost:3000/api/v1/categories/2

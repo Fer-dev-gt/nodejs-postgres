@@ -1,67 +1,55 @@
 const boom = require('@hapi/boom');
-const pool = require('../libs/postgres.pool')
+const pool = require('../libs/postgres.pool');
+
+const { models } = require('./../libs/sequelize');
 
 class CategoryService {
 
-	constructor() {
-		this.pool = pool;
-		this.pool.on('error', error => console.error(err));
-	}
+  constructor() {
+    this.pool = pool;
+    this.pool.on('error', error => console.error(err));
+  }
 
-	async create(data) {
-		let { name, items } = data;
-		const queryId = 'SELECT (MAX(ID) + 1) AS ID FROM CATEGORIES';
-		const { rows } = await this.pool.query(queryId);
+  async create(data) {
+    const newCategory = await models.Category.create(data);
+    return newCategory;
+  }
 
-		if (!items) {
-			items = 0;
-		}
+  async find() {
+    const categories = await models.Category.findAll();
+    return categories;
+  }
 
-		const values = [rows[0].id, name, items];
-		const query = 'INSERT INTO CATEGORIES (ID, NAME, ITEMS) VALUES ($1, $2, $3)';
-		await this.pool.query(query, values);
+  async findOne(id) {
+    const category = await models.Category.findByPk(id, {
+      include: ['products']
+    });
+    return category
+  }
 
-		return {
-			id: rows[0].id,
-			...data
-		}
-	}
+  async update(id, changes) {
+    const dataUpdate = [];
+    const setQuery = [];
 
-	async find() {
-		const query = 'SELECT * FROM categories';
-		const categories = await this.pool.query(query);
-		return categories.rows;
-	}
+    Object.entries(changes).forEach((entries, index) => {
+      setQuery.push(entries[0] + ` = $${index + 1}`);
+      dataUpdate.push(entries[1]);
+    })
 
-	async findOne(id) {
-		const query = 'SELECT * FROM categories WHERE id = $1';
-		const category = await this.pool.query(query, [id]);
-		return category.rows;
-	}
+    const query = `UPDATE CATEGORIES SET ${setQuery.join(", ")} WHERE ID = ${id}`;
+    await this.pool.query(query, dataUpdate)
 
-	async update(id, changes) {
-		const dataUpdate = [];
-		const setQuery = [];
+    return {
+      id,
+      ...changes
+    }
+  }
 
-		Object.entries(changes).forEach((entries, index) => {
-			setQuery.push(entries[0] + ` = $${index + 1}`);
-			dataUpdate.push(entries[1]);
-		})
-
-		const query = `UPDATE CATEGORIES SET ${setQuery.join(", ")} WHERE ID = ${id}`;
-		await this.pool.query(query, dataUpdate)
-
-		return {
-			id,
-			...changes
-		}
-	}
-
-	async delete(id) {
-		const query = 'DELETE FROM CATEGORIES WHERE ID = $1'
-		await this.pool.query(query)
-		return { id };
-	}
+  async delete(id) {
+    const query = 'DELETE FROM CATEGORIES WHERE ID = $1'
+    await this.pool.query(query)
+    return { id };
+  }
 
 }
 
