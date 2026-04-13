@@ -7,7 +7,7 @@ class CategoryService {
 
   constructor() {
     this.pool = pool;
-    this.pool.on('error', error => console.error(err));
+    this.pool.on('error', error => console.error(error));
   }
 
   async create(data) {
@@ -36,8 +36,8 @@ class CategoryService {
       dataUpdate.push(entries[1]);
     })
 
-    const query = `UPDATE CATEGORIES SET ${setQuery.join(", ")} WHERE ID = ${id}`;
-    await this.pool.query(query, dataUpdate)
+    const query = `UPDATE CATEGORIES SET ${setQuery.join(", ")} WHERE ID = $${dataUpdate.length + 1}`;
+    await this.pool.query(query, [...dataUpdate, id])
 
     return {
       id,
@@ -47,7 +47,7 @@ class CategoryService {
 
   async delete(id) {
     const query = 'DELETE FROM CATEGORIES WHERE ID = $1'
-    await this.pool.query(query)
+    await this.pool.query(query, [id])
     return { id };
   }
 

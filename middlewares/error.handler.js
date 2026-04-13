@@ -24,7 +24,7 @@ function boomErrorHandler(err, req, res, next) {
 function queryErrorHandler(err, req, res, next) {
   if (err.parent) {
     const { fields, parent } = err;
-    res.status(500).json({
+    return res.status(500).json({
       field: fields,
       message: parent.detail
     })
@@ -34,12 +34,13 @@ function queryErrorHandler(err, req, res, next) {
 
 function ormErrorHandler(err, req, res, next) {
   if (err instanceof ValidationError) {
-    res.status(409).json({
+    return res.status(409).json({
       statusCode: 409,
       message: err.name,
       errors: err.errors
     });
   }
+  next(err);
 }
 
 

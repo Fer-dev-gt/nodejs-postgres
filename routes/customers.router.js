@@ -11,7 +11,7 @@ const service = new CustomerService();
 router.get('/', async (req, res, next) => {
   try {
     res.json(await service.find());
-  } catch {
+  } catch (error) {
     next(error);
   }
 });
@@ -37,7 +37,7 @@ router.patch('/:id',
     try {
       const { id } = req.params;
       const body = req.body;
-      res.status(201).json(await service, update(id, body));
+      res.status(201).json(await service.update(id, body));
     } catch (error) {
       next(error);
     }

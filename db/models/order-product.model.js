@@ -53,8 +53,8 @@ class OrderProduct extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: CUSTOMER_TABLE,
-      modelName: 'Customer',
+      tableName: ORDER_PRODUCT_TABLE,
+      modelName: 'OrderProduct',
       timestamps: false,
     }
   }
