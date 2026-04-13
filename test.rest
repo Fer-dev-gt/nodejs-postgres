@@ -114,3 +114,11 @@ Content-Type: application/json
   "productId": 1,
   "amount": 7
 }
+
+
+###
+
+GET http://localhost:3000/api/v1/products?price=50
+###
+
+GET http://localhost:3000/api/v1/products?price_min=10&price_max=30
