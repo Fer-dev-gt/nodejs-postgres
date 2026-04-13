@@ -6,6 +6,23 @@ GET http://localhost:3000/api/v1/products
 
 ###
 
+GET http://localhost:3000/api/v1/products?limit=4&offset=3
+
+###
+
+POST http://localhost:3000/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Zapatos 12",
+  "price": 1212,
+  "description": "New Shoes for you",
+  "image": "http://placeimg.com/640/480",
+  "categoryId": 3
+}
+
+###
+
 POST http://localhost:3000/api/v1/users
 Content-Type: application/json
 
